@@ -1,5 +1,4 @@
 """Code to solve part 01 of day 04"""
-import re
 import numpy as np
 
 def read_file(filename):
