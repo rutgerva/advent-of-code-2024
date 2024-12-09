@@ -21,10 +21,7 @@ def construct_equation(operands, t_value, cur_total):
     if cur_total * int(operands[0]) > t_value:
         return construct_equation(operands[1:], t_value, cur_total + int(operands[0])) # Stop condition 3, only option left to create a valid equation from this point
     else:
-        valid = construct_equation(operands[1:], t_value, cur_total * int(operands[0]))
-        if not valid:
-            return construct_equation(operands[1:], t_value, cur_total + int(operands[0])) # Stop condition 4, only option left to create a valid equation from this point
-        return True # We found it!
+        return construct_equation(operands[1:], t_value, cur_total * int(operands[0])) or construct_equation(operands[1:], t_value, cur_total + int(operands[0]))
 
 
 def has_equation(operands, t_value):
