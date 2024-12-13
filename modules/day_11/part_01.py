@@ -1,6 +1,7 @@
 """Code to solve part 01 of day 11"""
 import threading
 import os
+from functools import cache
 def read_file(filename):
     """Methods reads a file and returns stream of lines"""
     all_lines = []
@@ -26,9 +27,8 @@ def blink(stones):
     return stones_after_blink
 
 alligned_stones = read_file('example_input')[0]
-for i in range(0, 25):
-    alligned_stones= blink(alligned_stones)
-
-print(len(alligned_stones))
+for i in range(0, 10):
+    alligned_stones = blink(alligned_stones)
+    print(alligned_stones)
 
 
