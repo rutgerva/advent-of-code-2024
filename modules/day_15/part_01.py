@@ -35,6 +35,12 @@ def can_move(row, col, drow, dcol, grid):
     else:
         return False
 
+def move_item(row, col, drow, dcol, grid, current_symbol):
+    if grid[row + drow][col + dcol] != '.':
+        move_item(row + drow, col + dcol, drow, dcol, grid, grid[row + drow][col + dcol])
+    grid[row + drow][col + dcol] = current_symbol
+
+
 def move(instruction, grid):
     delta_row = 0
     delta_col = 0
@@ -54,19 +60,8 @@ def move(instruction, grid):
         col = ROBOT_POS["col"]
         ROBOT_POS["row"] += delta_row
         ROBOT_POS["col"] += delta_col
-        current_symbol = grid[row + delta_row][col + delta_col]
-        next_symbol = grid[row + delta_row][col + delta_col]
-        #move the robot
-        grid[row + delta_row][col + delta_col] = '@'
         grid[row][col] = '.'
-        row += delta_row
-        col += delta_col
-        while next_symbol != '.':
-            next_symbol = grid[row + delta_row][col + delta_col]
-            grid[row + delta_row][col + delta_col] = current_symbol
-            current_symbol = next_symbol
-            row += delta_row
-            col += delta_col
+        move_item(row, col, delta_row, delta_col, grid, '@')
 
 
 def find_sum_of_coordinates(grid):
